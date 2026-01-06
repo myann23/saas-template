@@ -8,6 +8,8 @@ This file provides guidance to Claude Code when working with this project.
 ## Tech Stack
 [Fill in: What technologies are you using?]
 
+**Framework recommendation:** Use Next.js (App Router) for any web app with public-facing pages. Next.js provides SSR/SSG out of the box, making SEO trivial from day one. Avoids painful migrations later. Only use Vite for internal tools where SEO doesn't matter.
+
 ## Development
 [Fill in: How to run the project locally]
 
