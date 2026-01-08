@@ -1,0 +1,13 @@
+# Scratchpads
+
+This directory stores Claude's planning artifacts for GitHub issues.
+
+## Purpose
+- Institutional memory for AI-assisted development
+- Prior art search for similar issues
+- Plans with implementation steps
+
+## Naming Convention
+`issue-{number}-{slug}.md`
+
+Example: `issue-42-add-auth-flow.md`

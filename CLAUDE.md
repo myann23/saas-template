@@ -35,5 +35,18 @@ GitHub Issues are the source of truth for all technical work. Use Notion for bus
 ### Milestones
 MVP → v2 → Backlog
 
+### Working on Issues
+Use `/issue <number>` to work on a GitHub issue. This command follows a 4-phase workflow:
+1. **PLAN** - Understand the issue, search for prior art, document plan in scratchpad
+2. **CREATE** - Implement in small steps, commit after each step
+3. **TEST** - Run tests, fix failures, verify UI with Chrome extension
+4. **DEPLOY** - Final commit with `closes #<number>`, push to main
+
+### Scratchpads
+`docs/scratchpads/` stores planning artifacts for issues. These create institutional memory:
+- Search here for prior art on similar problems
+- Plans are named `issue-{number}-{slug}.md`
+- Include implementation steps and link to the issue
+
 ## Project Structure
 [Fill in as the project evolves]
