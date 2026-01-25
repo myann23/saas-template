@@ -1,42 +1,62 @@
 # Work on GitHub Issue
 
-Analyze and fix GitHub issue: $ARGUMENTS
+Work on GitHub issue #$ARGUMENTS
 
-Follow these steps:
+## ASSESS
+
+1. Fetch issue details: `gh issue view $ARGUMENTS`
+2. Determine complexity:
+   - **Simple**: One-file fix, typo, small bug, clear solution → skip to PLAN
+   - **Complex**: Multiple files, new feature, unclear approach, unfamiliar area → do RESEARCH first
+
+## RESEARCH (complex issues only)
+
+Use the Task tool to spawn an Explore subagent:
+
+```
+Analyze issue #$ARGUMENTS for this codebase. Find:
+1. Files likely affected by this change
+2. Existing patterns for similar functionality
+3. Related tests and testing conventions
+4. Dependencies or integrations to consider
+
+Return a concise context summary (under 500 words).
+```
+
+Create scratchpad at `docs/scratchpads/issue-$ARGUMENTS-{slug}.md` and save research findings.
 
 ## PLAN
 
-1. Use `gh issue view $ARGUMENTS` to get the issue details
-2. Understand the problem described in the issue
-3. Ask clarifying questions if necessary
-4. Understand the prior art for this issue:
-   - Search `docs/scratchpads/` for previous thoughts related to this issue
-   - Search PRs via `gh pr list --search` to find history on this issue
-   - Search the codebase for relevant files
-5. Think harder about how to break the issue down into a series of small, manageable tasks
-6. Document your plan in a new scratchpad:
-   - Save to `docs/scratchpads/issue-$ARGUMENTS-{slug}.md`
-   - Include a link to the issue
+1. Check `docs/scratchpads/` for previous work on similar issues
+2. Search PRs: `gh pr list --search "keywords"`
+3. Break down into small, manageable tasks
+4. Append plan to scratchpad (or create scratchpad if skipped research)
 
 ## CREATE
 
-- Solve the issue in small, manageable steps, according to your plan
-- Commit your changes after each step
+- Implement in small steps according to your plan
+- Commit after each meaningful change
+- Keep commits focused and atomic
 
 ## TEST
 
-- Use Claude Chrome browser extension to test UI changes visually
-- Run the project's test suite to ensure you haven't broken anything
-- If the tests are failing, fix them
-- Ensure that all tests are passing before moving on to the next step
+- Run the project's test suite
+- Test UI changes visually (use browser/screenshot tools)
+- Fix any failures before proceeding
+- All tests must pass before moving on
 
 ## DEPLOY
 
-- Commit final changes with message: "Description (closes #$ARGUMENTS)"
+- Final commit with message: `"Description (closes #$ARGUMENTS)"`
 - Push to main
+- Append completion summary to scratchpad: what was done, any gotchas for future reference
+
+## If Blocked
+
+- Add comment: `gh issue comment $ARGUMENTS -b "Blocked: [reason]"`
+- For complex work, post progress updates to the issue
 
 ---
 
-Remember to use the GitHub CLI (`gh`) for all GitHub-related tasks.
-
-If things go off track after 2-3 corrections, start fresh with `/clear` rather than continuing to correct.
+Use `gh` CLI for all GitHub operations.
+If things go off track after 2-3 corrections, `/clear` and start fresh.

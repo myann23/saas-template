@@ -23,6 +23,7 @@ npm run dev
 ## Documentation
 
 - [Project Plan](docs/project-plan.md) - What we're building
+- [GitHub Issues Manual](docs/github-issues-manual.md) - Issue-based workflow guide
 - [Technical Docs](docs/technical/) - Architecture & API
 - [Marketing](docs/marketing/) - GTM strategy
 

@@ -30,7 +30,41 @@ GitHub Issues are the source of truth for all technical work. Use Notion for bus
 4. Create new issues: `gh issue create` or ask Claude
 
 ### Labels
-`feature` `bug` `improvement` `blocked` `mvp` `v2`
+
+**Type labels:** `feature` `bug` `improvement` `blocked`
+
+**Category labels:** (customize per project, e.g., `setup` `database` `ui` `api` `auth`)
+
+### Issue Templates
+
+Always use the templates in `.github/ISSUE_TEMPLATE/` when creating issues:
+
+| Template | Use For | Auto-Label |
+|----------|---------|------------|
+| `feature.md` | New functionality | `feature` |
+| `bug.md` | Something broken | `bug` |
+| `improvement.md` | Enhance existing | `improvement` |
+
+**Creating issues via CLI:**
+```bash
+# Use the template structure in the body
+gh issue create --title "Add user auth" --label feature --label auth --body "$(cat <<'EOF'
+## Summary
+Add user authentication with email/password.
+
+## User Story
+As a user, I want to log in so that my data is saved.
+
+## Acceptance Criteria
+- [ ] Sign up form
+- [ ] Login form
+- [ ] Session persistence
+
+## Technical Notes
+Use Supabase Auth or NextAuth.js
+EOF
+)"
+```
 
 ### Milestones
 MVP → v2 → Backlog
