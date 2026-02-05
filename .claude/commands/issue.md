@@ -47,12 +47,21 @@ Create scratchpad at `docs/scratchpads/issue-$ARGUMENTS-{slug}.md` and save rese
 - Commit after each meaningful change
 - Keep commits focused and atomic
 
-## TEST
+## TEST (Mandatory)
 
-- Run the project's test suite
-- Test UI changes visually (use browser/screenshot tools)
-- Fix any failures before proceeding
-- All tests must pass before moving on
+**You MUST run these checks before DEPLOY. Do not skip.**
+
+1. **Run `/verify quick`** - This runs lint, build, and tests
+2. **If tests fail:** Fix the issues, re-run `/verify quick`
+3. **If UI changes:** Test visually with browser tools or screenshots
+4. **All checks must pass** before proceeding to DEPLOY
+
+```bash
+# Minimum verification (always run)
+npm run lint && npm run build && npm test
+```
+
+If any check fails, fix and re-run. Do not proceed to DEPLOY with failing tests.
 
 ## DEPLOY
 

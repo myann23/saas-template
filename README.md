@@ -76,7 +76,8 @@ Lanes are independent - work on all of them simultaneously.
 | Command | Purpose |
 |---------|---------|
 | `/setup-issues` | Generate issues from project plan with lane grouping |
-| `/issue <n>` | Work on a specific issue (full workflow) |
+| `/lane <a\|b\|c\|d>` | Work through ALL issues in a lane without stopping |
+| `/issue <n>` | Work on a single issue |
 | `/plan` | Create implementation plan |
 | `/tdd` | Test-driven development |
 | `/code-review` | Security and quality review |

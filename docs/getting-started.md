@@ -208,70 +208,58 @@ gh issue list --label lane-d
 
 ## Step 4: Work in Parallel
 
-You have two options for parallel development:
+### Option A: Lane Command (Recommended)
 
-### Option A: Single Session (Sequential)
+Use `/lane` to work through all issues in a lane without stopping:
 
-Work on one issue at a time:
-
+**Terminal 1:**
 ```
-/issue 1    # Complete auth
-/issue 2    # Then tasks
-/issue 4    # Then dashboard
+/lane a    # Works through ALL Lane A issues automatically
 ```
 
-**Best for:** Learning, small projects, when you want full control.
-
-### Option B: Multiple Sessions (Parallel)
-
-Open multiple Claude Code sessions, one per lane:
-
-**Terminal 1 (Lane A - Auth):**
+**Terminal 2:**
 ```
-/issue 1
+/lane b    # Works through ALL Lane B issues automatically
 ```
 
-**Terminal 2 (Lane B - Tasks):**
+**Terminal 3:**
 ```
-/issue 2
-# then /issue 3 after #2 is done
-```
-
-**Terminal 3 (Lane C - Dashboard):**
-```
-/issue 4
+/lane c    # Works through ALL Lane C issues automatically
 ```
 
-**Terminal 4 (Lane D - Notifications):**
+The `/lane` command:
+- Fetches all open issues in the lane
+- Works through them in order (respecting dependencies)
+- Runs tests after each issue (mandatory)
+- Continues to next issue without prompting
+- Reports completion when lane is done
+
+**Best for:** Most projects. Set it and let it run.
+
+### Option B: Single Issue Mode
+
+Work on one issue at a time with full control:
+
 ```
-/issue 5
+/issue 1    # Complete one issue
+/issue 2    # Then manually start the next
 ```
 
-**Best for:** Speed, larger projects, when you have the compute budget.
+**Best for:** Learning, debugging, when you need to intervene frequently.
 
 ### Option C: Sub-Agent Workers (Advanced)
 
-Use the Task tool to spawn autonomous workers:
+Spawn autonomous agents for each lane:
 
 ```
-Spawn 4 Task agents in parallel, one for each lane:
+Spawn 3 Task agents in parallel:
 
-Lane A Worker:
-"Work on issue #1 (User authentication). Follow the /issue workflow:
-ASSESS → PLAN → CREATE → TEST → DEPLOY. Commit with 'closes #1' when done."
-
-Lane B Worker:
-"Work on issues #2, then #3 in order. Follow /issue workflow for each.
-#3 depends on #2, so complete #2 first."
-
-Lane C Worker:
-"Work on issue #4 (Dashboard). Follow /issue workflow."
-
-Lane D Worker:
-"Work on issue #5 (Email notifications). Follow /issue workflow."
+Lane A: "/lane a"
+Lane B: "/lane b"
+Lane C: "/lane c"
 ```
 
-**Best for:** Maximum parallelization, when features are truly independent.
+**Best for:** Maximum parallelization with minimal oversight.
 
 ---
 
@@ -377,7 +365,8 @@ gh issue list --state open --json number | jq length
 | Command | Purpose |
 |---------|---------|
 | `/setup-issues` | Generate issues from project plan |
-| `/issue <n>` | Work on a specific issue |
+| `/lane <a\|b\|c\|d>` | Work through ALL issues in a lane (recommended) |
+| `/issue <n>` | Work on a single issue |
 | `/triage-issues` | Review and prioritize open issues |
 | `/plan` | Create implementation plan |
 | `/code-review` | Review uncommitted changes |
@@ -391,11 +380,10 @@ gh issue list --state open --json number | jq length
 2. Run /setup-issues
 3. Confirm issue creation
 4. Work lanes in parallel:
-   - /issue 1 (Lane A)
-   - /issue 2 (Lane B)
-   - /issue 4 (Lane C)
-   - etc.
-5. Merge and ship
+   - Terminal 1: /lane a
+   - Terminal 2: /lane b
+   - Terminal 3: /lane c
+5. All lanes complete → Ship
 ```
 
 ### Lane Labels
@@ -463,22 +451,18 @@ code docs/project-plan.md   # Write your PRD
 /setup-issues
 > yes
 
-# 3. Start parallel work (4 terminals)
+# 3. Start parallel work (3 terminals)
 
 # Terminal 1
-/issue 1   # Auth
+/lane a   # Works through all auth issues automatically
 
 # Terminal 2
-/issue 2   # Tasks
-/issue 3   # Focus view (after #2 done)
+/lane b   # Works through all task/UI issues automatically
 
 # Terminal 3
-/issue 4   # Dashboard
+/lane c   # Works through all API issues automatically
 
-# Terminal 4
-/issue 5   # Notifications
-
-# 4. All issues closed → MVP complete!
+# 4. All lanes complete → MVP done!
 gh issue list --state open   # Should be empty
 ```
 

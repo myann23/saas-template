@@ -40,6 +40,12 @@ Or use: `/triage-issues`
 ```
 Parses `docs/project-plan.md` and creates issues grouped into parallel lanes.
 
+### Working through a lane
+```
+/lane a
+```
+Works through ALL issues in lane-a without stopping. Runs tests after each issue.
+
 ---
 
 ## Parallel Work with Lanes

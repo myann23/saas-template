@@ -63,7 +63,8 @@ Lane C (api): #5 Endpoints
 
 - **Different lanes** → work in parallel (no conflicts)
 - **Same lane** → work sequentially (dependencies exist)
-- Filter by lane: `gh issue list --label lane-a`
+- Use `/lane a` to work through all issues in Lane A without stopping
+- Use `/issue 1` to work on a single issue with full control
 
 ### Daily Workflow
 
