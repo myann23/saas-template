@@ -34,6 +34,31 @@ triage the open issues
 ```
 Or use: `/triage-issues`
 
+### Setting up from project plan
+```
+/setup-issues
+```
+Parses `docs/project-plan.md` and creates issues grouped into parallel lanes.
+
+---
+
+## Parallel Work with Lanes
+
+The `/setup-issues` command groups related features into **lanes** for parallel development:
+
+```
+Lane A (auth): User auth, Password reset
+Lane B (dashboard): Layout, Charts
+Lane C (independent): Email notifications
+```
+
+**Benefits:**
+- Work on Lane A and Lane B simultaneously (different sub-agents)
+- Issues in the same lane have dependencies and must be sequential
+- Filter by lane: `gh issue list --label lane-a`
+
+**Lane labels:** `lane-a`, `lane-b`, `lane-c`, `lane-d`
+
 ---
 
 ## Quick Commands
@@ -60,6 +85,10 @@ Or use: `/triage-issues`
 | `blocked` | Waiting on something external |
 | `mvp` | MVP milestone |
 | `v2` | Version 2 milestone |
+| `lane-a` | Parallelization lane A |
+| `lane-b` | Parallelization lane B |
+| `lane-c` | Parallelization lane C |
+| `lane-d` | Parallelization lane D |
 
 ---
 
