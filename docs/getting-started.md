@@ -426,6 +426,133 @@ If two agents try to edit the same file:
 
 ---
 
+## Understanding Tests (For Non-Technical Founders)
+
+Testing makes sure your code works correctly. Think of it like quality control in a factory - you check the product before shipping it.
+
+### Why Testing Matters
+
+- **Catch bugs early** - Find problems before users do
+- **Safe changes** - Modify code without breaking things
+- **Documentation** - Tests show how code should behave
+- **Confidence** - Ship features knowing they work
+
+### Types of Tests (Plain English)
+
+| Type | What It Does | Analogy |
+|------|--------------|---------|
+| **Lint** | Checks code spelling/grammar | Spell-check for code |
+| **Type Check** | Ensures data types match | Making sure you don't put a word where a number should go |
+| **Unit Tests** | Tests small pieces in isolation | Testing one LEGO brick works |
+| **Integration Tests** | Tests pieces working together | Testing LEGO bricks snap together |
+| **E2E Tests** | Tests the whole app like a user | Someone actually using your product |
+
+### The Commands You Need
+
+Open your terminal in the project folder and run these:
+
+#### Quick Check (Run Often)
+```bash
+npm run verify:quick
+```
+**What it does:** Checks types and builds your app. Takes ~30 seconds.
+**When to run:** After making changes, before committing.
+
+#### Full Test Suite
+```bash
+npm run test
+```
+**What it does:** Runs all unit tests.
+**When to run:** Before pushing code.
+
+#### See Test Coverage
+```bash
+npm run test:coverage
+```
+**What it does:** Shows which code is tested (aim for 80%+).
+**When to run:** Weekly, or when adding features.
+
+#### Everything At Once
+```bash
+npm run verify
+```
+**What it does:** Lint + Types + Build + Tests. The full check.
+**When to run:** Before merging code or deploying.
+
+#### Test Like a Real User (E2E)
+```bash
+npm run test:e2e
+```
+**What it does:** Opens a browser and clicks through your app.
+**When to run:** Before major releases.
+
+### Reading Test Results
+
+#### When Tests Pass
+```
+✓ should format USD by default
+✓ should handle zero
+✓ should handle negative numbers
+
+Test Files  1 passed (1)
+Tests       6 passed (6)
+```
+**Green checkmarks = good!** Your code works as expected.
+
+#### When Tests Fail
+```
+✗ should format USD by default
+  Expected: "$1,000.00"
+  Received: "$1000"
+
+Test Files  1 failed (1)
+Tests       1 failed | 5 passed (6)
+```
+**Red X = something broke.** The test tells you:
+- What was expected
+- What actually happened
+- Which file has the problem
+
+### What To Do When Tests Fail
+
+1. **Read the error message** - It tells you what went wrong
+2. **Find the file** - The test output shows which file failed
+3. **Fix the code** - Usually a small typo or logic error
+4. **Run tests again** - Make sure your fix worked
+
+### Coverage Report Explained
+
+```
+File           | % Stmts | % Branch | % Funcs | % Lines |
+---------------|---------|----------|---------|---------|
+utils.ts       |   100   |   100    |   100   |   100   |
+Button.tsx     |    85   |    75    |   100   |    85   |
+```
+
+- **Stmts (Statements):** Lines of code that ran
+- **Branch:** Different paths (if/else) that were tested
+- **Funcs:** Functions that were called
+- **Lines:** Total lines covered
+
+**Goal:** Keep everything above 80%. The template enforces this automatically.
+
+### Testing is Automatic
+
+You don't need to remember to run tests. The `/lane` and `/issue` commands run them automatically before deploying. If tests fail, the code won't be deployed until you fix it.
+
+### First-Time Setup
+
+Before running tests the first time:
+
+```bash
+npm install                    # Install everything (one time)
+npx playwright install         # Install browser testing (one time)
+```
+
+Then you can run any test command.
+
+---
+
 ## Next Steps
 
 After MVP is complete:
