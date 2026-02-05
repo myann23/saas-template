@@ -17,8 +17,7 @@ vi.mock('next/navigation', () => ({
 
 // Example: Mock next/image
 vi.mock('next/image', () => ({
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} />;
+  default: (props: Record<string, unknown>) => {
+    return Object.assign(document.createElement('img'), props);
   },
 }));
