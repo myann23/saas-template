@@ -33,7 +33,14 @@ npm-debug.log*
 # Testing
 coverage/
 .nyc_output/
+playwright-report/
+playwright/.cache/
+test-results/
+
+# Husky
+.husky/_
 
 # Misc
 *.bak
 *.tmp
+*.tsbuildinfo
