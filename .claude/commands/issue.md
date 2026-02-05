@@ -2,10 +2,19 @@
 
 Work on GitHub issue #$ARGUMENTS
 
+## Lane Awareness
+
+Issues created by `/setup-issues` have lane labels (`lane-a`, `lane-b`, etc.):
+- **Same lane** = may have dependencies → complete in order
+- **Different lanes** = independent → can run `/issue` in parallel across lanes
+
+Check the issue's lane: `gh issue view $ARGUMENTS --json labels`
+
 ## ASSESS
 
 1. Fetch issue details: `gh issue view $ARGUMENTS`
-2. Determine complexity:
+2. Check for dependencies (issues in same lane that should complete first)
+3. Determine complexity:
    - **Simple**: One-file fix, typo, small bug, clear solution → skip to PLAN
    - **Complex**: Multiple files, new feature, unclear approach, unfamiliar area → do RESEARCH first
 

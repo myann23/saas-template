@@ -44,15 +44,39 @@ npm test          # Unit/integration tests
 
 GitHub Issues are the source of truth for all technical work. Use Notion for business/marketing tasks.
 
-### Workflow
-1. Check open issues: `gh issue list`
-2. Work on an issue: `gh issue view <number>` then implement
+### Starting a New Project
+
+1. Write your PRD in `docs/project-plan.md`
+2. Run `/setup-issues` to generate issues with parallel lanes
+3. Confirm creation when prompted
+4. Work on lanes in parallel (see below)
+
+### Parallel Lanes
+
+`/setup-issues` groups related features into independent **lanes** that can be worked on simultaneously:
+
+```
+Lane A (auth): #1 User auth, #2 Password reset
+Lane B (dashboard): #3 Layout, #4 Charts
+Lane C (api): #5 Endpoints
+```
+
+- **Different lanes** → work in parallel (no conflicts)
+- **Same lane** → work sequentially (dependencies exist)
+- Filter by lane: `gh issue list --label lane-a`
+
+### Daily Workflow
+
+1. Check open issues: `gh issue list` (or by lane: `--label lane-a`)
+2. Work on an issue: `/issue <number>`
 3. Reference in commits: `"Fix bug (closes #42)"`
-4. Create new issues: `gh issue create` or ask Claude
+4. Create new issues: `gh issue create` or `/setup-issues` for bulk
 
 ### Labels
 
 **Type labels:** `feature` `bug` `improvement` `blocked`
+
+**Lane labels:** `lane-a` `lane-b` `lane-c` `lane-d` (for parallel work)
 
 **Category labels:** (customize per project, e.g., `setup` `database` `ui` `api` `auth`)
 
